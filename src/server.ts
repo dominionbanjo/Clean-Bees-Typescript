@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 dotenv.config();
+import "express-async-errors";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
