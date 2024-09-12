@@ -2,8 +2,11 @@ import { Link, useRouteError } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Error";
 import img from "../assets/images/not-found.svg";
 
+interface RouteError extends Error {
+  status?: number;
+}
 const Error = () => {
-  const error = useRouteError();
+  const error = useRouteError() as RouteError;
   if (error.status === 404) {
     return (
       <Wrapper>

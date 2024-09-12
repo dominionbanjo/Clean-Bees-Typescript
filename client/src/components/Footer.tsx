@@ -1,4 +1,3 @@
-import React from "react";
 import fb from "../assets/images/fb-logp.webp";
 import st from "../assets/images/strange-logo.webp";
 import Wrapper from "../assets/wrappers/Footer";

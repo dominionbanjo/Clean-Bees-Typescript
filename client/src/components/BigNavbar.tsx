@@ -1,13 +1,18 @@
 import Wrapper from "../assets/wrappers/BigNavbar";
 import logo from "../assets/images/sponge.webp";
-import NavLinks from "./NavLinks";
+import NavLinks from "./Navlinks";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useHomepageContext } from "../pages/HomepageLayout";
 
+interface User {
+  avatar?: string;
+  firstName?: string;
+}
+
 const BigNavbar = () => {
-  const { user } = useHomepageContext();
+  const { user }: { user: User } = useHomepageContext();
   const navigate = useNavigate();
   return (
     <Wrapper className="big-nav">
@@ -45,7 +50,7 @@ const BigNavbar = () => {
         </div>
 
         <ul>
-          <NavLinks />
+          <NavLinks smallScreen={false} />
         </ul>
 
         <IoMenu className="menu" />

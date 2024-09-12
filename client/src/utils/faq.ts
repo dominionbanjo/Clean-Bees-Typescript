@@ -1,9 +1,14 @@
-export const faq1 = [
+type Faq = {
+  question: string;
+  answer: string;
+};
+
+export const faq1: Faq[] = [
   {
     question: "What is a FAQ section?",
     answer: `An FAQ section can be used to quickly answer common questions about your business like "Where do you ship to?", "What are your opening hours?", or "How can I book a service?".
-
-`,
+  
+  `,
   },
   {
     question: "Why do FAQs matter?",
@@ -15,7 +20,7 @@ export const faq1 = [
   },
 ];
 
-export const faq2 = [
+export const faq2: Faq[] = [
   {
     question: "How do I add a new question & answer?",
     answer:

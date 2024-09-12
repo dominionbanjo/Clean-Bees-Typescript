@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Form,
   Link,
@@ -13,10 +12,12 @@ import { FaFacebookF } from "react-icons/fa";
 import { IoChevronBackCircleOutline } from "react-icons/io5"; // Import the icon
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
+import { QueryClient } from "@tanstack/react-query";
+import axios from "axios";
 
 export const action =
-  (queryClient) =>
-  async ({ request }) => {
+  (queryClient: QueryClient) =>
+  async ({ request }: { request: Request }) => {
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
 
@@ -26,7 +27,18 @@ export const action =
       toast.success("Login successful");
       return redirect("/homepage");
     } catch (error) {
-      toast.error(error?.response?.data?.msg);
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          toast.error(error.response.data.msg);
+        } else if (error.request) {
+          toast.error("No response from server");
+        } else {
+          toast.error("Request error");
+        }
+      } else {
+        toast.error("An unknown error occurred");
+      }
+      //   toast.error(error?.response?.data?.msg);
       return error;
     }
   };

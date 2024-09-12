@@ -1,4 +1,18 @@
-const FormRow = ({ type, name, labelText, defaultValue, onChange }) => {
+interface FormRow {
+  type: string;
+  name: string;
+  defaultValue?: string;
+  labelText?: string;
+  onChange?: () => void;
+}
+
+const FormRow = ({
+  type,
+  name,
+  labelText,
+  defaultValue,
+  onChange,
+}: FormRow) => {
   return (
     <div className="form-row">
       <label className="label" htmlFor={name}>

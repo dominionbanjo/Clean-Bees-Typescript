@@ -3,7 +3,7 @@ import Wrapper from "../assets/wrappers/Landing";
 import hand from "../assets/images/hands.webp";
 import handTwo from "../assets/images/hands-small.webp";
 import { Link } from "react-router-dom";
-const Landing = ({ landing }) => {
+const Landing = ({ landing }: { landing: boolean }) => {
   return (
     <Wrapper $desktop={hand} $mobile={handTwo}>
       <div className="hands-page">

@@ -19,7 +19,7 @@ const Home = () => {
   }, [hash]);
   return (
     <Wrapper>
-      <Landing />
+      <Landing landing={false} />
       <div className="call-now-page">
         <h1>Call Now 123-456-7890</h1>
       </div>

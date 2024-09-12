@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const Wrapper = styled.section`
+interface WrapperProps {
+  $desktop: string;
+  $mobile: string;
+}
+const Wrapper = styled.section<WrapperProps>`
   background-color: #0f93fe;
 
   width: 100vw;

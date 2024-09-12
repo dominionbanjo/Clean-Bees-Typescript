@@ -5,12 +5,14 @@ import { useHomepageContext } from "./HomepageLayout";
 import { useNavigation } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
+import { QueryClient } from "@tanstack/react-query";
+import axios from "axios";
 
 export const action =
-  (queryClient) =>
-  async ({ request }) => {
+  (queryClient: QueryClient) =>
+  async ({ request }: { request: Request }) => {
     const formData = await request.formData();
-    const file = formData.get("avatar");
+    const file = (formData.get("avatar") as File) || null;
     if (file && file.size > 500000) {
       toast.error("Image size too large");
       return null;
@@ -18,12 +20,23 @@ export const action =
 
     try {
       await customFetch.patch("/users/update-user", formData);
-      queryClient.invalidateQueries(["user"]);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       toast.success("Profile updated successfully");
       return redirect("/homepage");
     } catch (error) {
-      toast.error(error?.response?.data?.msg);
-      return null;
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          toast.error(error.response.data.msg);
+        } else if (error.request) {
+          toast.error("No response from server");
+        } else {
+          toast.error("Request error");
+        }
+      } else {
+        toast.error("An unknown error occurred");
+      }
+      //   toast.error(error?.response?.data?.msg);
+      return error;
     }
   };
 

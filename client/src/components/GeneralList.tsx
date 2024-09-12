@@ -1,5 +1,4 @@
-import { IoIosArrowDown } from "react-icons/io";
-import { faq1 } from "../utils/Faq";
+import { faq1 } from "../utils/faq";
 import FaqItem from "./FaqItem";
 const GeneralList = () => {
   return (

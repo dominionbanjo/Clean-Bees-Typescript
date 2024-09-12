@@ -4,8 +4,14 @@ import { IoLogoFacebook } from "react-icons/io5";
 import { FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const FaqItem = ({ question, answer }) => {
-  const [isVisible, setIsVisible] = useState(false);
+const FaqItem = ({
+  question,
+  answer,
+}: {
+  question: string;
+  answer: string;
+}) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const handleToggle = () => {
     setIsVisible(!isVisible);

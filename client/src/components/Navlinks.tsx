@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import links from "../utils/Links";
+import { links } from "../utils/links";
 import { useHomepageContext } from "../pages/HomepageLayout";
 
-const NavLinks = ({ smallScreen }) => {
+const NavLinks = ({ smallScreen }: { smallScreen: boolean }) => {
   const { toggleSidebar } = useHomepageContext();
   return (
     <>
@@ -14,7 +14,7 @@ const NavLinks = ({ smallScreen }) => {
             <NavLink
               to={path}
               className={className}
-              onClick={smallScreen ? toggleSidebar : null}
+              onClick={smallScreen ? toggleSidebar : () => {}}
               end
             >
               {text}

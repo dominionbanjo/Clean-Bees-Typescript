@@ -1,7 +1,7 @@
 import { useHomepageContext } from "../pages/HomepageLayout";
 import { FaUserCircle } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
-import NavLinks from "./NavLinks";
+import NavLinks from "./Navlinks";
 import Wrapper from "../assets/wrappers/PopScreen";
 import { IoCloseSharp } from "react-icons/io5";
 import AnimatedPage from "./AnimatedPage";
@@ -50,7 +50,7 @@ const PopScreen = () => {
         </div>
 
         <ul>
-          <NavLinks smallScreen />
+          <NavLinks smallScreen={true} />
         </ul>
       </Wrapper>
     </AnimatedPage>

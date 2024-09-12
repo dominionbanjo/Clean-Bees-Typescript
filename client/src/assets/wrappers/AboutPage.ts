@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
+interface WrapperProps {
+  $mobile: string;
+}
+
+const Wrapper = styled.div<WrapperProps>`
   .about-texts {
     background-color: #0f93fe;
     color: white;
@@ -104,7 +108,7 @@ const Wrapper = styled.div`
     }
 
     .about-texts img {
-      content: url(${(props) => props.$glovesT});
+      content: url(${(props) => props.$mobile});
       position: absolute;
       top: 625px;
       left: 0;

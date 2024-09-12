@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
+import { ReactNode } from "react";
 
 const animations = {
   initial: {
     opacity: 0,
     x: -100,
-    position: "absolute",
+    position: "absolute" as const,
     width: "100%",
     zIndex: 10,
   },
@@ -20,7 +21,12 @@ const animations = {
   },
 };
 
-const AnimatedPage = ({ children, key }) => {
+interface AnimatedPageProps {
+  children: ReactNode;
+  key?: string;
+}
+
+const AnimatedPage = ({ children, key }: AnimatedPageProps) => {
   return (
     <motion.div
       key={key}

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import testimonials from "../utils/Testimonials";
+import { testimonials } from "../utils/testimonials";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const TestimonialSlider = () => {

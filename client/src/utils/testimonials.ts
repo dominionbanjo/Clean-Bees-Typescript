@@ -1,4 +1,9 @@
-const testimonials = [
+type Testimonial = {
+  name: string;
+  text: string;
+};
+
+export const testimonials: Testimonial[] = [
   {
     name: "CHRISTOPHER DAVIS",
     text: "“I'm a testimonial. Click to edit me and add text that says something nice about you and your services. Let your customers review you and tell their friends how great you are.”",
@@ -12,5 +17,3 @@ const testimonials = [
     text: "“I'm a testimonial. Click to edit me and add text that says something nice about you and your services. Let your customers review you and tell their friends how great you are.”",
   },
 ];
-
-export default testimonials;

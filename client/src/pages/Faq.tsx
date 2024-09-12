@@ -6,7 +6,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Faq = () => {
-  const [listState, setListState] = useState(true);
+  const [listState, setListState] = useState<boolean>(true);
 
   return (
     <Wrapper>
