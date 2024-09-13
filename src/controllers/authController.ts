@@ -62,8 +62,8 @@ export const forgotPassword = async (
   const user = await User.findOne({ email: req.body.email });
   if (user) {
     const passwordToken = crypto.randomBytes(70).toString("hex");
-    const origin2 = "https://clean-bees-typescript.onrender.com";
-    const origin = "http://localhost:5100";
+    const origin = "https://clean-bees-typescript.onrender.com";
+    // const origin2 = "http://localhost:5100";
 
     await sendResetPasswordEmail({
       name: user.firstName,
