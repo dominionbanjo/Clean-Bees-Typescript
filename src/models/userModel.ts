@@ -1,5 +1,5 @@
 import mongoose, { Document } from "mongoose";
-
+import { hashPassword } from "../utils/passwordUtil";
 export interface IUser extends Document {
   firstName: string;
   lastName: string;
@@ -9,6 +9,8 @@ export interface IUser extends Document {
   role: "user" | "admin";
   avatar?: string;
   avatarPublicId?: string;
+  passwordToken?: string | null;
+  passwordTokenExpirationDate?: Date | null;
   toJSON(): Omit<IUser, "password">;
 }
 
@@ -25,6 +27,17 @@ const UserSchema = new mongoose.Schema<IUser>({
   },
   avatar: { type: String },
   avatarPublicId: { type: String },
+  passwordToken: {
+    type: String,
+  },
+  passwordTokenExpirationDate: {
+    type: Date,
+  },
+});
+
+UserSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
+  this.password = await hashPassword(this.password);
 });
 
 UserSchema.methods.toJSON = function () {

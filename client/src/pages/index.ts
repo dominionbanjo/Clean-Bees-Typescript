@@ -10,3 +10,5 @@ export { default as Error } from "./Error";
 export { default as HomeLayout } from "./HomeLayout";
 export { default as Home } from "./Home";
 export { default as Profile } from "./Profile";
+export { default as ResetPassword } from "./ResetPassword";
+export { default as ForgotPassword } from "./ForgotPassword";

@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { register, login, logout } from "../controllers/authController";
+import {
+  register,
+  login,
+  logout,
+  forgotPassword,
+  resetPassword,
+} from "../controllers/authController";
 import rateLimit from "express-rate-limit";
 import {
   validateLoginInput,
@@ -17,5 +23,7 @@ const apiLimiter = rateLimit({
 router.post("/login", apiLimiter, validateLoginInput, login);
 router.post("/register", apiLimiter, validateRegisterInput, register);
 router.get("/logout", logout);
+router.post("/reset-password", resetPassword);
+router.post("/forgot-password", forgotPassword);
 
 export default router;

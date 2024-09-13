@@ -88,6 +88,12 @@ const Login = () => {
             Register
           </Link>
         </p>
+        <p>
+          Forgot your password?{" "}
+          <Link className="home-link formred" to="/forgot-password">
+            reset password
+          </Link>
+        </p>
         <div className="social">
           <div className="go">
             <FaGoogle /> Google

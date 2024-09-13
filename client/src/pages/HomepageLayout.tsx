@@ -22,8 +22,8 @@ type UserContext = {
   email: string;
   location: string;
   __v: number;
-  avatar: string;
-  avatarPublicId: string;
+  avatar?: string;
+  avatarPublicId?: string;
   role: string;
 };
 export const UserSchema = z.object({
@@ -34,8 +34,8 @@ export const UserSchema = z.object({
     email: z.string(),
     location: z.string(),
     __v: z.number(),
-    avatar: z.string(),
-    avatarPublicId: z.string(),
+    avatar: z.string().optional(),
+    avatarPublicId: z.string().optional(),
     role: z.string(),
   }),
 });

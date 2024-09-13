@@ -15,10 +15,14 @@ import {
   HomeLayout,
   Home,
   Profile,
+  ResetPassword,
+  ForgotPassword,
 } from "./pages";
 
 import { action as loginAction } from "./pages/Login";
 import { action as registerAction } from "./pages/Register";
+import { action as forgotPasswordAction } from "./pages/ForgotPassword";
+import { action as resetPasswordAction } from "./pages/ResetPassword";
 import { action as profileAction } from "./pages/Profile";
 import { loader as homepageLoader } from "./pages/HomepageLayout";
 
@@ -49,6 +53,16 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
         action: loginAction(queryClient),
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
+        action: resetPasswordAction,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPassword />,
+        action: forgotPasswordAction,
       },
       {
         path: "/homepage",
