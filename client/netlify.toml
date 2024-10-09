@@ -2,4 +2,4 @@
   from = "/api/*"
   to = "https://clean-bees-typescript.onrender.com/api/:splat"
   status = 200
-  headers = {X-Forwarded-Host = ":host"}
+  force = true
