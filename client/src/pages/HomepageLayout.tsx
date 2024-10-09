@@ -123,12 +123,22 @@ const HomepageLayout = ({ queryClient }: HomepageLayout) => {
     setShowSidebar(!showSidebar);
   };
 
-  const logoutUser = async () => {
+  // const logoutUser = async () => {
+  //   if (hasLoggedOut) return;
+  //   setHasLoggedOut(true);
+  //   await customFetch.get("/auth/logout");
+  //   queryClient.clear();
+  //   toast.success("Logout successful");
+  //   navigate("/homepage");
+  // };
+  const logoutUser = async (showToast: boolean = true) => {
     if (hasLoggedOut) return;
     setHasLoggedOut(true);
     await customFetch.get("/auth/logout");
     queryClient.clear();
-    toast.success("Logout successful");
+    if (showToast) {
+      toast.success("Logout successful");
+    }
     navigate("/homepage");
   };
 
@@ -142,9 +152,14 @@ const HomepageLayout = ({ queryClient }: HomepageLayout) => {
     }
   );
 
+  // useEffect(() => {
+  //   if (isAuthError && !hasLoggedOut) {
+  //     logoutUser();
+  //   }
+  // }, [isAuthError, hasLoggedOut]);
   useEffect(() => {
     if (isAuthError && !hasLoggedOut) {
-      logoutUser();
+      logoutUser(false);
     }
   }, [isAuthError, hasLoggedOut]);
 

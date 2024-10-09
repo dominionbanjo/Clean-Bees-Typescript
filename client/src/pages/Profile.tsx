@@ -50,7 +50,7 @@ const Profile = () => {
 
   return (
     <Wrapper>
-      <button className="logout-button" onClick={logoutUser}>
+      <button className="logout-button" onClick={() => logoutUser()}>
         Logout
       </button>
       <Form method="post" encType="multipart/form-data">
