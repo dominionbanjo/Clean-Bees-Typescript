@@ -30,7 +30,7 @@ const PopScreen = () => {
             ) : (
               <FaUserCircle style={{ marginRight: "18px" }} />
             )}
-            {user?.firstName === "Pizza" ? (
+            {user?.firstName === "" ? (
               <NavLink className="login-a" to="/login">
                 Log In
               </NavLink>

@@ -24,7 +24,7 @@ import { action as registerAction } from "./pages/Register";
 import { action as forgotPasswordAction } from "./pages/ForgotPassword";
 import { action as resetPasswordAction } from "./pages/ResetPassword";
 import { action as profileAction } from "./pages/Profile";
-import { loader as homepageLoader } from "./pages/HomepageLayout";
+// import { loader as homepageLoader } from "./pages/HomepageLayout";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
       {
         path: "/homepage",
         element: <HomepageLayout queryClient={queryClient} />,
-        loader: homepageLoader(queryClient),
+        // loader: homepageLoader(queryClient),
         children: [
           {
             index: true,

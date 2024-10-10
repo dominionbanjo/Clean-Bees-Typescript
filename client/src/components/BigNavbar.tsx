@@ -38,7 +38,7 @@ const BigNavbar = () => {
           ) : (
             <FaUserCircle />
           )}
-          {user?.firstName === "Pizza" ? (
+          {user?.firstName === "" ? (
             <NavLink to="/login">Log In</NavLink>
           ) : (
             <p onClick={() => navigate("profile")} style={{ fontSize: "20px" }}>

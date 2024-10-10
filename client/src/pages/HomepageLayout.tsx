@@ -4,9 +4,9 @@ import Footer from "../components/Footer";
 import SmallNavbar from "../components/SmallNavbar";
 import { createContext, useContext, useEffect, useState } from "react";
 import customFetch from "../utils/customFetch";
-import { useQuery, QueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { z } from "zod";
+import { QueryClient } from "@tanstack/react-query";
 
 interface HomepageContext {
   user: UserContext;
@@ -26,6 +26,7 @@ type UserContext = {
   avatarPublicId?: string;
   role: string;
 };
+
 export const UserSchema = z.object({
   user: z.object({
     _id: z.string(),
@@ -42,68 +43,16 @@ export const UserSchema = z.object({
 
 export type User = z.infer<typeof UserSchema>;
 
-const userQuery = {
-  queryKey: ["user"],
-  queryFn: async () => {
-    try {
-      const { data } = await customFetch.get<User>("/users/current-user");
-      const result = UserSchema.safeParse(data);
-
-      if (!result.success) {
-        console.log(result.error.message);
-        throw new Error("Failed to parse user");
-      }
-      return result.data;
-    } catch (error) {
-      return {
-        user: {
-          _id: "",
-          firstName: "Pizza",
-          lastName: "",
-          email: "",
-          location: "",
-          __v: 0,
-          avatar: "",
-          avatarPublicId: "",
-          role: "",
-        },
-      };
-    }
-  },
-};
-
-export const loader = (queryClient: QueryClient) => async () => {
-  try {
-    return await queryClient.ensureQueryData(userQuery);
-  } catch (error) {
-    toast.info("Please login to your account");
-    return {
-      user: {
-        _id: "",
-        firstName: "Pizza",
-        lastName: "",
-        email: "",
-        location: "",
-        __v: 0,
-        avatar: "",
-        avatarPublicId: "",
-        role: "",
-      },
-    };
-  }
-};
-
 const HomepageContext = createContext<HomepageContext | undefined>(undefined);
 
-type HomepageLayout = {
+type HomepageLayoutProps = {
   queryClient: QueryClient;
 };
-const HomepageLayout = ({ queryClient }: HomepageLayout) => {
-  const { data } = useQuery(userQuery);
 
-  const user: UserContext = data?.user || {
+const HomepageLayout = ({ queryClient }: HomepageLayoutProps) => {
+  const [user, setUser] = useState<UserContext>({
     _id: "",
-    firstName: "Guest",
+    firstName: "",
     lastName: "",
     email: "",
     location: "",
@@ -111,36 +60,71 @@ const HomepageLayout = ({ queryClient }: HomepageLayout) => {
     avatar: "",
     avatarPublicId: "",
     role: "",
-  };
-
+  });
   const [showSidebar, setShowSidebar] = useState(false);
   const [isAuthError, setIsAuthError] = useState(false);
   const [hasLoggedOut, setHasLoggedOut] = useState(false);
-
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);
   };
 
-  // const logoutUser = async () => {
-  //   if (hasLoggedOut) return;
-  //   setHasLoggedOut(true);
-  //   await customFetch.get("/auth/logout");
-  //   queryClient.clear();
-  //   toast.success("Logout successful");
-  //   navigate("/homepage");
-  // };
   const logoutUser = async (showToast: boolean = true) => {
     if (hasLoggedOut) return;
     setHasLoggedOut(true);
     await customFetch.get("/auth/logout");
     queryClient.clear();
+    setUser({
+      _id: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      location: "",
+      __v: 0,
+      avatar: "",
+      avatarPublicId: "",
+      role: "",
+    });
     if (showToast) {
       toast.success("Logout successful");
     }
     navigate("/homepage");
   };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const { data } = await customFetch.get<User>("/users/current-user");
+        const result = UserSchema.safeParse(data);
+        if (!result.success) {
+          console.log(result.error.message);
+          throw new Error("Failed to parse user");
+        }
+        setUser(result.data.user);
+      } catch (error) {
+        setUser({
+          _id: "",
+          firstName: "",
+          lastName: "",
+          email: "",
+          location: "",
+          __v: 0,
+          avatar: "",
+          avatarPublicId: "",
+          role: "",
+        });
+      }
+    };
+
+    fetchUser();
+  }, [isAuthError]);
+
+  useEffect(() => {
+    if (isAuthError && !hasLoggedOut) {
+      logoutUser(false);
+    }
+  }, [isAuthError, hasLoggedOut]);
 
   customFetch.interceptors.response.use(
     (response) => response,
@@ -151,17 +135,6 @@ const HomepageLayout = ({ queryClient }: HomepageLayout) => {
       return Promise.reject(error);
     }
   );
-
-  // useEffect(() => {
-  //   if (isAuthError && !hasLoggedOut) {
-  //     logoutUser();
-  //   }
-  // }, [isAuthError, hasLoggedOut]);
-  useEffect(() => {
-    if (isAuthError && !hasLoggedOut) {
-      logoutUser(false);
-    }
-  }, [isAuthError, hasLoggedOut]);
 
   return (
     <HomepageContext.Provider
@@ -189,4 +162,5 @@ export const useHomepageContext = () => {
   }
   return context;
 };
+
 export default HomepageLayout;
