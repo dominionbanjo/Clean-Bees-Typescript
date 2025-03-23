@@ -1,68 +1,34 @@
-<!-- # Job Applications Manager (MERN Stack)
+# Clean Bees - Professional Cleaning Services
 
-[Live Demo](https://job-applications-manager01.netlify.app)
+[Live Demo](https://clean-bees.netlify.app/)
 
-This MERN stack project helps users track their job applications and monitor the progress of each application.
+## Overview
 
-## Features
-
-1. Add new job applications.
-2. Track application progress: `Pending`, `Interview`, `Declined`.
-3. Set job type: `Full-time`, `Internship`, `Pending`.
-4. Edit job details and update statuses anytime.
-5. Delete job applications.
-
-## Tech Stack
-
-### Frontend
-- React
-- Vite
-- TypeScript
-
-### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-
-### Authentication & Security
-- JSON Web Tokens (JWT)
-- bcryptjs
-- Helmet
-- Express Rate Limit
-- Express Validator
-- Express Mongo Sanitize
-
-### Other Dependencies
-- Multer (File Uploads)
-- Cloudinary (Image Hosting)
-- Day.js (Date Formatting)
-- Nanoid (Unique ID Generation)
-- Cookie Parser
-
-## Setup Instructions -->
-
-# Job Applications Manager (MERN Stack)
-
-[Live Demo](https://job-applications-manager01.netlify.app)
-
-This MERN stack project helps users track their job applications and monitor the progress of each application.
+Clean Bees offers a variety of cleaning services for both homes and offices. Customers can easily book professional cleaners, manage their cleaning schedules, and enjoy a spotless environment with ease.
 
 ## Features
 
-1. Add new job applications.
-2. Track application progress: `Pending`, `Interview`, `Declined`.
-3. Set job type: `Full-time`, `Internship`, `Pending`.
-4. Edit job details and update statuses anytime.
-5. Delete job applications.
+1. Book cleaning services for homes and offices.
+2. Choose from different cleaning packages.
+3. Secure user authentication (Sign up, Login, Logout).
+<!-- 4. Track and manage cleaning appointments.
+4. Admin dashboard for managing bookings and users.
+5. Notifications and reminders for upcoming cleanings. -->
 
 ## Tech Stack
 
 ### Frontend
 
 - React
-- Vite
-- TypeScript
+- React Router
+- Styled Components
+- Framer Motion
+- React Query
+- React Transition Group
+- Axios
+- Zod (Form Validation)
+- Recharts (Data Visualization)
+- FontAwesome Icons
 
 ### Backend
 
@@ -82,8 +48,9 @@ This MERN stack project helps users track their job applications and monitor the
 
 ### Other Dependencies
 
-- Multer (File Uploads)
 - Cloudinary (Image Hosting)
+- Multer (File Uploads)
+- SendGrid (Email Service)
 - Day.js (Date Formatting)
 - Nanoid (Unique ID Generation)
 - Cookie Parser
@@ -96,7 +63,7 @@ Clone the repository to your local machine.
 
 ### 2. Install Dependencies
 
-npm run setup-project
+npm install
 
 ### 3. Configure Environment Variables
 
@@ -106,21 +73,29 @@ MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret  
 CLOUDINARY_CLOUD_NAME=your_cloudinary_name  
 CLOUDINARY_API_KEY=your_cloudinary_api_key  
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret  
+SENDGRID_API_KEY=your_sendgrid_api_key
 
 ### 4. Start the Development Server
 
+#### Backend
+
+npm run dev
+
+#### Frontend
+
+cd client  
 npm run dev
 
 ## Project Scripts
 
-| Command                      | Description                                      |
-| ---------------------------- | ------------------------------------------------ |
-| npm run setup-project        | Installs dependencies for both client and server |
-| npm run setup-production-app | Installs dependencies and builds the frontend    |
-| npm run server               | Starts the backend server with Nodemon           |
-| npm run client               | Starts the frontend in development mode          |
-| npm run dev                  | Runs both backend and frontend concurrently      |
+| Command                      | Description                                   |
+| ---------------------------- | --------------------------------------------- |
+| npm run setup-production-app | Installs dependencies and builds the frontend |
+| npm run start                | Starts the backend server                     |
+| npm run dev                  | Runs the backend in development mode          |
+| npm run build                | Builds the project for production             |
+| npm run preview              | Serves the production build locally           |
 
 ## License
 
